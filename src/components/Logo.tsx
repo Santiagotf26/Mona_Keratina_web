@@ -31,12 +31,12 @@ export const Logo = ({ style, className, color = 'currentColor' }: { style?: Rea
     <line x1="60" y1="85" x2="140" y2="85" stroke={color} strokeWidth="8" strokeLinecap="round" />
 
     {/* MONA text */}
-    <text x="100" y="115" fill={color} textAnchor="middle" fontSize="26" fontWeight="300" letterSpacing="14" fontFamily="'Inter', sans-serif">M O N A</text>
+    <text x="100" y="115" fill={color} textAnchor="middle" fontSize="28" fontWeight="600" letterSpacing="16" fontFamily="'Cormorant Garamond', serif">MONA</text>
     
     {/* Separator line */}
     <line x1="15" y1="122" x2="185" y2="122" stroke={color} strokeWidth="1" />
     
     {/* KERATINA text */}
-    <text x="100" y="138" fill={color} textAnchor="middle" fontSize="16" fontWeight="400" letterSpacing="10" fontFamily="'Inter', sans-serif">KERATINA</text>
+    <text x="100" y="138" fill={color} textAnchor="middle" fontSize="14" fontWeight="400" letterSpacing="12" fontFamily="'Cormorant Garamond', serif">KERATINA</text>
   </svg>
 );

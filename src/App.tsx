@@ -100,18 +100,23 @@ const App = () => {
     <div className="min-h-screen bg-background text-primary selection:bg-accent selection:text-white pb-20">
       {/* WhatsApp Floating Button */}
       <motion.a 
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        whileHover={{ scale: 1.1 }}
+        initial={{ x: 100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        whileHover={{ scale: 1.02 }}
         href={getWhatsAppUrl("Hola Mona Keratina! Quisiera recibir información sobre sus servicios.")}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center group"
+        className="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white pr-8 pl-6 py-4 rounded-full shadow-2xl flex items-center gap-4 group overflow-hidden border border-white/20"
       >
-        <MessageCircle size={32} />
-        <span className="absolute right-full mr-4 bg-white text-primary px-4 py-2 rounded-xl text-xs font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-          ¿Cómo podemos ayudarte?
-        </span>
+        <div className="relative">
+          <MessageCircle size={24} className="relative z-10" />
+          <motion.div 
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute inset-0 bg-white/30 rounded-full blur-md"
+          />
+        </div>
+        <span className="text-[10px] uppercase tracking-[3px] font-bold">Habla con nosotros</span>
       </motion.a>
 
       {/* Header */}
@@ -131,7 +136,7 @@ const App = () => {
                 <a href="#nosotros" className="hover:text-accent transition-colors">Filosofía</a>
                 <a href={getWhatsAppUrl("Hola! Deseo agendar una cita.")} className="hover:text-accent transition-colors">Contacto</a>
              </div>
-             <a href="https://instagram.com" className="p-2 hover:text-accent transition-colors">
+             <a href="https://www.instagram.com/monakeratinaduitama?igsh=Z3Z3cDk1d2ZjZWE4" target="_blank" rel="noopener noreferrer" className="p-2 hover:text-accent transition-colors">
                 <Instagram size={20} />
              </a>
              <button className="md:hidden" onClick={() => setMobileMenuOpen(true)}>
@@ -153,15 +158,6 @@ const App = () => {
               alt="Mona Keratina - Belleza Consciente" 
             />
             <div className="absolute inset-0 bg-black/5"></div>
-            <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12">
-               <motion.a 
-                 href="#servicios"
-                 whileHover={{ scale: 1.05 }}
-                 className="bg-white/90 backdrop-blur-sm px-6 py-2.5 md:px-8 md:py-3 rounded-full text-[9px] md:text-[10px] uppercase tracking-[3px] font-bold shadow-xl inline-block"
-               >
-                 Ver servicios
-               </motion.a>
-            </div>
          </div>
          <div className="w-full md:w-1/2 flex items-center justify-center p-12 md:p-24 bg-background">
             <div className="max-w-xl">
@@ -187,9 +183,14 @@ const App = () => {
                >
                  Expertos en la transformación de tu cabello con fórmulas orgánicas y tecnología de punta. Elevamos el estándar del alisado premium.
                </motion.p>
-               <a href={getWhatsAppUrl("Hola Mona! Quiero agendar una valoración.")} className="inline-flex items-center gap-4 text-[11px] uppercase tracking-[4px] font-bold group border-b border-primary pb-2">
-                 AGENDAR VALORACIÓN <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-               </a>
+                <div className="flex flex-wrap items-center gap-8">
+                  <a href={getWhatsAppUrl("Hola Mona! Quiero agendar una valoración.")} className="inline-flex items-center gap-4 text-[11px] uppercase tracking-[4px] font-bold group border-b border-primary pb-2">
+                    AGENDAR VALORACIÓN <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+                  </a>
+                  <a href="#servicios" className="text-[11px] uppercase tracking-[4px] font-bold opacity-40 hover:opacity-100 transition-opacity">
+                    VER SERVICIOS
+                  </a>
+                </div>
             </div>
          </div>
       </header>
@@ -385,7 +386,7 @@ const App = () => {
                 <h2 className="text-4xl font-serif mb-4">Mona en el mundo</h2>
                 <p className="opacity-40 uppercase tracking-widest text-[10px] font-bold">Resultados reales de nuestras clientas @MonaKeratina</p>
              </div>
-             <a href="https://instagram.com" className="flex items-center gap-2 text-xs uppercase tracking-widest font-bold hover:text-accent transition-all group">
+             <a href="https://www.instagram.com/monakeratinaduitama?igsh=Z3Z3cDk1d2ZjZWE4" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs uppercase tracking-widest font-bold hover:text-accent transition-all group">
                Ir a Instagram <ArrowRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
              </a>
           </div>
@@ -409,7 +410,7 @@ const App = () => {
                   Redefiniendo la salud capilar a través de la ciencia orgánica y el lujo consciente.
                </p>
                <div className="flex gap-4 mt-8">
-                  <a href="#" className="w-10 h-10 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-sm">
+                  <a href="https://www.instagram.com/monakeratinaduitama?igsh=Z3Z3cDk1d2ZjZWE4" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-sm">
                      <Instagram size={18} />
                   </a>
                   <a href={getWhatsAppUrl("Hola Mona Keratina!")} className="w-10 h-10 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-sm">
@@ -446,32 +447,59 @@ const App = () => {
          </div>
       </footer>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Minimalist Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, y: '100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '100%' }}
-            className="fixed inset-0 z-[100] bg-background p-8 flex flex-col justify-between"
-          >
-            <div>
-               <div className="flex justify-between items-center mb-20">
-                  <Logo style={{ height: '40px' }} color="currentColor" className="text-primary" />
-                  <button onClick={() => setMobileMenuOpen(false)} className="p-3 bg-surface rounded-full shadow-sm">
-                    <X size={24} />
-                  </button>
-               </div>
-               <nav className="flex flex-col gap-10">
-                  {['Servicios', 'Sedes', 'Filosofía'].map(item => (
-                    <a key={item} href={`#${item.toLowerCase()}`} className="text-5xl font-serif hover:text-accent transition-colors" onClick={() => setMobileMenuOpen(false)}>{item}</a>
-                  ))}
-               </nav>
-            </div>
-            <a href={getWhatsAppUrl("Hola! Deseo agendar una cita.")} className="w-full bg-primary text-white text-center py-6 rounded-full font-bold uppercase tracking-[4px] text-xs shadow-xl">
-              Agendar ahora
-            </a>
-          </motion.div>
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90]"
+            />
+            <motion.div 
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm z-[100] bg-background shadow-2xl p-8 flex flex-col"
+            >
+              <div className="flex justify-between items-center mb-16">
+                 <Logo style={{ height: '30px' }} color="currentColor" className="text-primary" />
+                 <button onClick={() => setMobileMenuOpen(false)} className="p-2 opacity-60">
+                   <X size={20} />
+                 </button>
+              </div>
+              <nav className="flex flex-col gap-8">
+                 {['Servicios', 'Sedes', 'Filosofía'].map((item, i) => (
+                   <motion.a 
+                     key={item} 
+                     initial={{ opacity: 0, x: 20 }}
+                     animate={{ opacity: 1, x: 0 }}
+                     transition={{ delay: 0.1 + i * 0.05 }}
+                     href={`#${item.toLowerCase()}`} 
+                     className="text-3xl font-serif hover:text-accent transition-colors border-b border-border/10 pb-4" 
+                     onClick={() => setMobileMenuOpen(false)}
+                   >
+                     {item}
+                   </motion.a>
+                 ))}
+              </nav>
+              <div className="mt-auto pt-12">
+                <a 
+                  href={getWhatsAppUrl("Hola! Deseo agendar una cita.")} 
+                  className="w-full bg-primary text-white text-center py-4 rounded-full font-bold uppercase tracking-[4px] text-[10px] shadow-lg block"
+                >
+                  Agendar ahora
+                </a>
+                <div className="flex justify-center gap-6 mt-8 opacity-40">
+                  <a href="https://www.instagram.com/monakeratinaduitama?igsh=Z3Z3cDk1d2ZjZWE4" target="_blank" rel="noopener noreferrer"><Instagram size={18} /></a>
+                  <a href={getWhatsAppUrl("Hola Mona!")} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} /></a>
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </div>
