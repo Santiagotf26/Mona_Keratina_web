@@ -121,7 +121,6 @@ const App = () => {
         </div>
         <span className="text-[8px] uppercase tracking-[2px] font-bold">Habla con nosotros</span>
       </motion.a>
-      </motion.a>
 
       {/* Header */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-background/80 backdrop-blur-md py-4 border-b border-border/20' : 'bg-transparent py-6 border-transparent'}`}>
