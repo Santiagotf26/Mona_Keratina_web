@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { 
   Instagram, 
   ArrowRight, 
@@ -81,9 +81,12 @@ const App = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSede, setActiveSede] = useState(sedes[0]);
+  const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
     const lenis = new Lenis();
+    lenisRef.current = lenis;
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -92,8 +95,16 @@ const App = () => {
 
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      lenis.destroy();
+    };
   }, []);
+
+  const scrollTo = (id: string) => {
+    setMobileMenuOpen(false);
+    lenisRef.current?.scrollTo(id, { offset: -80, duration: 1.5 });
+  };
 
   return (
     <div className="min-h-screen bg-background text-primary selection:bg-accent selection:text-white pb-20">
@@ -126,8 +137,8 @@ const App = () => {
       <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-background/80 backdrop-blur-md py-4 border-b border-border/20' : 'bg-transparent py-6 border-transparent'}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex-1 hidden md:flex gap-8 text-[10px] uppercase tracking-[3px] font-bold opacity-60">
-             <a href="#servicios" className="hover:text-accent transition-colors">Servicios</a>
-             <a href="#sedes" className="hover:text-accent transition-colors">Sedes</a>
+             <button onClick={() => scrollTo('#servicios')} className="hover:text-accent transition-colors">Servicios</button>
+             <button onClick={() => scrollTo('#sedes')} className="hover:text-accent transition-colors">Sedes</button>
           </div>
           
           <div className="flex-shrink-0">
@@ -136,8 +147,8 @@ const App = () => {
 
           <div className="flex-1 flex justify-end items-center gap-6">
              <div className="hidden md:flex gap-8 text-[10px] uppercase tracking-[3px] font-bold opacity-60">
-                <a href="#acerca" className="hover:text-accent transition-colors">Nosotros</a>
-                <a href={getWhatsAppUrl("Hola! Deseo agendar una cita.")} className="hover:text-accent transition-colors">Contacto</a>
+                <button onClick={() => scrollTo('#acerca')} className="hover:text-accent transition-colors">Nosotros</button>
+                <a href={getWhatsAppUrl("Hola! Deseo agendar una cita.")} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">Contacto</a>
              </div>
              <a href="https://www.instagram.com/monakeratinaduitama?igsh=Z3Z3cDk1d2ZjZWE4" target="_blank" rel="noopener noreferrer" className="p-2 hover:text-accent transition-colors">
                 <Instagram size={20} />
@@ -190,9 +201,9 @@ const App = () => {
                   <a href={getWhatsAppUrl("Hola Mona! Quiero agendar una valoración.")} className="inline-flex items-center gap-4 text-[11px] uppercase tracking-[4px] font-bold group border-b border-primary pb-2">
                     AGENDAR VALORACIÓN <ArrowRight className="group-hover:translate-x-2 transition-transform" />
                   </a>
-                  <a href="#servicios" className="text-[11px] uppercase tracking-[4px] font-bold opacity-40 hover:opacity-100 transition-opacity">
+                  <button onClick={() => scrollTo('#servicios')} className="text-[11px] uppercase tracking-[4px] font-bold opacity-40 hover:opacity-100 transition-opacity">
                     VER SERVICIOS
-                  </a>
+                  </button>
                 </div>
             </div>
          </div>
@@ -423,10 +434,10 @@ const App = () => {
             <div>
                <h4 className="text-[10px] uppercase tracking-[4px] font-bold mb-8 opacity-80">Navegación</h4>
                <ul className="space-y-4 text-[10px] opacity-40 uppercase tracking-[2px] font-bold">
-                  <li><a href="#servicios" className="hover:text-accent transition-colors">Servicios</a></li>
-                  <li><a href="#sedes" className="hover:text-accent transition-colors">Nuestras Sedes</a></li>
-                  <li><a href="#acerca" className="hover:text-accent transition-colors">Nosotros</a></li>
-                  <li><a href={getWhatsAppUrl("Hola!")} className="hover:text-accent transition-colors">Contacto</a></li>
+                  <li><button onClick={() => scrollTo('#servicios')} className="hover:text-accent transition-colors">Servicios</button></li>
+                  <li><button onClick={() => scrollTo('#sedes')} className="hover:text-accent transition-colors">Nuestras Sedes</button></li>
+                  <li><button onClick={() => scrollTo('#acerca')} className="hover:text-accent transition-colors">Nosotros</button></li>
+                  <li><a href={getWhatsAppUrl("Hola!")} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">Contacto</a></li>
                </ul>
             </div>
             <div>
@@ -474,18 +485,17 @@ const App = () => {
                  </button>
               </div>
               <nav className="flex flex-col gap-8">
-                 {['Servicios', 'Sedes', 'Contacto'].map((item, i) => (
-                   <motion.a 
+                 {['Servicios', 'Sedes', 'Nosotros'].map((item, i) => (
+                   <motion.button 
                      key={item} 
                      initial={{ opacity: 0, x: 20 }}
                      animate={{ opacity: 1, x: 0 }}
                      transition={{ delay: 0.1 + i * 0.05 }}
-                     href={item === 'Contacto' ? getWhatsAppUrl("Hola Mona!") : `#${item.toLowerCase()}`} 
-                     className="text-3xl font-serif hover:text-accent transition-colors border-b border-border/10 pb-4" 
-                     onClick={() => setMobileMenuOpen(false)}
+                     onClick={() => scrollTo(`#${item.toLowerCase() === 'nosotros' ? 'acerca' : item.toLowerCase()}`)} 
+                     className="text-left text-3xl font-serif hover:text-accent transition-colors border-b border-border/10 pb-4" 
                    >
                      {item}
-                   </motion.a>
+                   </motion.button>
                  ))}
               </nav>
               <div className="mt-auto pt-12">
