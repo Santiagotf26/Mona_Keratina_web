@@ -105,26 +105,22 @@ const App = () => {
         href={getWhatsAppUrl("Hola Mona Keratina! Quisiera recibir información sobre sus servicios.")}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white pr-8 pl-6 py-4 rounded-full shadow-2xl flex items-center gap-4 group overflow-hidden border border-white/20"
+        className="fixed bottom-6 right-6 z-[100] bg-[#25D366] text-white pr-6 pl-4 py-3 rounded-full shadow-2xl flex items-center gap-3 group overflow-hidden border border-white/20"
       >
         <div className="relative">
           <svg 
             viewBox="0 0 24 24" 
-            width="24" 
-            height="24" 
+            width="18" 
+            height="18" 
             fill="currentColor" 
             xmlns="http://www.w3.org/2000/svg"
             className="relative z-10"
           >
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.438 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
           </svg>
-          <motion.div 
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute inset-0 bg-white/30 rounded-full blur-md"
-          />
         </div>
-        <span className="text-[10px] uppercase tracking-[3px] font-bold">Habla con nosotros</span>
+        <span className="text-[8px] uppercase tracking-[2px] font-bold">Habla con nosotros</span>
+      </motion.a>
       </motion.a>
 
       {/* Header */}
@@ -141,7 +137,7 @@ const App = () => {
 
           <div className="flex-1 flex justify-end items-center gap-6">
              <div className="hidden md:flex gap-8 text-[10px] uppercase tracking-[3px] font-bold opacity-60">
-                <a href="#nosotros" className="hover:text-accent transition-colors">Filosofía</a>
+                <a href="#acerca" className="hover:text-accent transition-colors">Nosotros</a>
                 <a href={getWhatsAppUrl("Hola! Deseo agendar una cita.")} className="hover:text-accent transition-colors">Contacto</a>
              </div>
              <a href="https://www.instagram.com/monakeratinaduitama?igsh=Z3Z3cDk1d2ZjZWE4" target="_blank" rel="noopener noreferrer" className="p-2 hover:text-accent transition-colors">
@@ -244,67 +240,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* About Section - Improved Offset Layout */}
-      <section id="nosotros" className="py-40 px-6 bg-surface/10 relative overflow-hidden">
-         {/* Decorative Element */}
-         
-         <div className="container mx-auto">
-            <div className="relative">
-               {/* Background Block */}
-               <motion.div 
-                 initial={{ opacity: 0, x: -50 }}
-                 whileInView={{ opacity: 1, x: 0 }}
-                 className="md:w-[80%] bg-surface p-12 md:p-32 rounded-[60px] relative z-10 shadow-sm border border-border/10"
-               >
-                  <div className="max-w-2xl">
-                    <span className="text-[10px] uppercase tracking-[6px] font-bold text-accent block mb-8">Nuestra Filosofía</span>
-                    <h2 className="text-5xl md:text-6xl font-serif mb-12 leading-tight">Mona Keratina:<br/><span className="text-accent italic">Ciencia que respeta tu esencia.</span></h2>
-                    <div className="space-y-8 text-lg md:text-xl leading-relaxed opacity-70">
-                      <p>
-                        No creemos en la belleza que duele. En Mona Keratina, hemos perfeccionado el arte del alisado orgánico para que sea una experiencia de bienestar profundo, no un sacrificio.
-                      </p>
-                      <p>
-                        Nuestra tecnología de <strong>Nanoinfusión Botánica</strong> permite que los activos penetren la fibra capilar sin químicos agresivos, devolviendo el brillo y la sedosidad natural que tu cabello merece.
-                      </p>
-                    </div>
-
-                    {/* Commitment Icons */}
-                    <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 pt-12 border-t border-border/20">
-                       <div className="flex flex-col gap-3">
-                          <h4 className="text-[10px] uppercase tracking-widest font-bold">100% Orgánico</h4>
-                          <p className="text-[10px] opacity-40 font-bold uppercase tracking-widest leading-relaxed">Libre de formol y agresivos</p>
-                       </div>
-                       <div className="flex flex-col gap-3">
-                          <ShieldCheck className="text-accent" size={24} />
-                          <h4 className="text-[10px] uppercase tracking-widest font-bold">Seguridad Total</h4>
-                          <p className="text-[10px] opacity-40 font-bold uppercase tracking-widest leading-relaxed">Apto para todas las edades</p>
-                       </div>
-                       <div className="flex flex-col gap-3">
-                          <Award className="text-accent" size={24} />
-                          <h4 className="text-[10px] uppercase tracking-widest font-bold">Calidad Premium</h4>
-                          <p className="text-[10px] opacity-40 font-bold uppercase tracking-widest leading-relaxed">Expertos certificados</p>
-                       </div>
-                    </div>
-                  </div>
-               </motion.div>
-               {/* Offset Image with decorative frame */}
-               <motion.div 
-                 initial={{ opacity: 0, scale: 0.9, x: 50 }}
-                 whileInView={{ opacity: 1, scale: 1, x: 0 }}
-                 className="hidden md:block absolute top-1/2 right-0 -translate-y-1/2 w-1/2 z-20"
-               >
-                  <div className="relative group p-4">
-                     <div className="absolute inset-0 border border-accent/20 rounded-[50px] translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-700"></div>
-                     <img src={aboutImg} className="w-full aspect-[4/5] object-cover rounded-[40px] shadow-2xl relative z-10" alt="Mona Studio Experience" />
-                  </div>
-               </motion.div>
-               {/* Mobile Image */}
-               <div className="md:hidden mt-8">
-                  <img src={aboutImg} className="w-full rounded-[40px] shadow-xl" alt="Mona Studio Experience" />
-               </div>
-            </div>
-         </div>
-      </section>
 
       {/* Book An Appointment / Sedes Section */}
       <section id="sedes" className="py-32 px-6">
@@ -408,6 +343,66 @@ const App = () => {
           </div>
         </div>
       </section>
+      {/* About Section - Improved Offset Layout */}
+      <section id="acerca" className="py-40 px-6 bg-surface/10 relative overflow-hidden">
+         <div className="container mx-auto">
+            <div className="relative">
+               {/* Background Block */}
+               <motion.div 
+                 initial={{ opacity: 0, x: -50 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 className="md:w-[80%] bg-surface p-12 md:p-32 rounded-[60px] relative z-10 shadow-sm border border-border/10"
+               >
+                  <div className="max-w-2xl">
+                    <span className="text-[10px] uppercase tracking-[6px] font-bold text-accent block mb-8">Acerca de nosotros</span>
+                    <h2 className="text-5xl md:text-6xl font-serif mb-12 leading-tight">Mona Keratina:<br/><span className="text-accent italic">Ciencia que respeta tu esencia.</span></h2>
+                    <div className="space-y-8 text-lg md:text-xl leading-relaxed opacity-70">
+                      <p>
+                        No creemos en la belleza que duele. En Mona Keratina, hemos perfeccionado el arte del alisado orgánico para que sea una experiencia de bienestar profundo, no un sacrificio.
+                      </p>
+                      <p>
+                        Nuestra tecnología de <strong>Nanoinfusión Botánica</strong> permite que los activos penetren la fibra capilar sin químicos agresivos, devolviendo el brillo y la sedosidad natural que tu cabello merece.
+                      </p>
+                    </div>
+
+                    {/* Commitment Icons */}
+                    <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 pt-12 border-t border-border/20">
+                       <div className="flex flex-col gap-3">
+                          <Check className="text-accent" size={24} />
+                          <h4 className="text-[10px] uppercase tracking-widest font-bold">100% Orgánico</h4>
+                          <p className="text-[10px] opacity-40 font-bold uppercase tracking-widest leading-relaxed">Libre de formol y agresivos</p>
+                       </div>
+                       <div className="flex flex-col gap-3">
+                          <ShieldCheck className="text-accent" size={24} />
+                          <h4 className="text-[10px] uppercase tracking-widest font-bold">Seguridad Total</h4>
+                          <p className="text-[10px] opacity-40 font-bold uppercase tracking-widest leading-relaxed">Apto para todas las edades</p>
+                       </div>
+                       <div className="flex flex-col gap-3">
+                          <Award className="text-accent" size={24} />
+                          <h4 className="text-[10px] uppercase tracking-widest font-bold">Calidad Premium</h4>
+                          <p className="text-[10px] opacity-40 font-bold uppercase tracking-widest leading-relaxed">Expertos certificados</p>
+                       </div>
+                    </div>
+                  </div>
+               </motion.div>
+               {/* Offset Image with decorative frame */}
+               <motion.div 
+                 initial={{ opacity: 0, scale: 0.9, x: 50 }}
+                 whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                 className="hidden md:block absolute top-1/2 right-0 -translate-y-1/2 w-1/2 z-20"
+               >
+                  <div className="relative group p-4">
+                     <div className="absolute inset-0 border border-accent/20 rounded-[50px] translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-700"></div>
+                     <img src={aboutImg} className="w-full aspect-[4/5] object-cover rounded-[40px] shadow-2xl relative z-10" alt="Mona Studio Experience" />
+                  </div>
+               </motion.div>
+               {/* Mobile Image */}
+               <div className="md:hidden mt-8">
+                  <img src={aboutImg} className="w-full rounded-[40px] shadow-xl" alt="Mona Studio Experience" />
+               </div>
+            </div>
+         </div>
+      </section>
 
       {/* Final Footer */}
       <footer className="bg-background py-32 border-t border-border/10">
@@ -431,7 +426,7 @@ const App = () => {
                <ul className="space-y-4 text-[10px] opacity-40 uppercase tracking-[2px] font-bold">
                   <li><a href="#servicios" className="hover:text-accent transition-colors">Servicios</a></li>
                   <li><a href="#sedes" className="hover:text-accent transition-colors">Nuestras Sedes</a></li>
-                  <li><a href="#nosotros" className="hover:text-accent transition-colors">Filosofía</a></li>
+                  <li><a href="#acerca" className="hover:text-accent transition-colors">Nosotros</a></li>
                   <li><a href={getWhatsAppUrl("Hola!")} className="hover:text-accent transition-colors">Contacto</a></li>
                </ul>
             </div>
@@ -480,13 +475,13 @@ const App = () => {
                  </button>
               </div>
               <nav className="flex flex-col gap-8">
-                 {['Servicios', 'Sedes', 'Filosofía'].map((item, i) => (
+                 {['Servicios', 'Sedes', 'Contacto'].map((item, i) => (
                    <motion.a 
                      key={item} 
                      initial={{ opacity: 0, x: 20 }}
                      animate={{ opacity: 1, x: 0 }}
                      transition={{ delay: 0.1 + i * 0.05 }}
-                     href={`#${item.toLowerCase()}`} 
+                     href={item === 'Contacto' ? getWhatsAppUrl("Hola Mona!") : `#${item.toLowerCase()}`} 
                      className="text-3xl font-serif hover:text-accent transition-colors border-b border-border/10 pb-4" 
                      onClick={() => setMobileMenuOpen(false)}
                    >
