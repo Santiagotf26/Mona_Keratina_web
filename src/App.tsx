@@ -20,6 +20,10 @@ import sReconexion from './assets/reconexion_molecular.jpeg';
 import sKeratina from './assets/keratina_premiun.jpeg';
 import sFotonico from './assets/alisado_fotonico.jpeg';
 import sCirugia from './assets/cirugia_capilar.jpeg';
+import sedeDuitama from './assets/sede_duitama.png';
+import sedeSogamoso from './assets/sede_sogamoso.png';
+import sedeTunja from './assets/sede_tunja.png';
+import sedeBogota from './assets/sede_bogota.png';
 
 const WHATSAPP_NUMBER = "573223328408";
 
@@ -43,7 +47,7 @@ const sedes = [
     description: 'Nuestra casa matriz donde comenzó la revolución de la belleza consciente en Boyacá. Un espacio diseñado para la excelencia.',
     perks: ['Nanoinfusión capilar', 'Atención personalizada', 'Ambiente premium'],
     price: 'Sede Principal',
-    img: sReconexion
+    img: sedeDuitama
   },
   {
     id: 'sogamoso',
@@ -52,8 +56,8 @@ const sedes = [
     address: 'Carrera 11 # 12-40',
     description: 'Minimalismo y tecnología en el corazón de Sogamoso para transformar tu cabello con salud.',
     perks: ['Terapias de ozono', 'Asesoría botánica', 'Relax total'],
-    price: 'Próximamente',
-    img: sKeratina
+    price: 'Sede Premium',
+    img: sedeSogamoso
   },
   {
     id: 'tunja',
@@ -62,18 +66,18 @@ const sedes = [
     address: 'CC Unicentro Local 24',
     description: 'Ubicación estratégica para brindarte el mejor alisado orgánico de la ciudad.',
     perks: ['Fácil acceso', 'Corte global incluido', 'Tecnología fotónica'],
-    price: 'Agendar cita',
-    img: sFotonico
+    price: 'Studio Express',
+    img: sedeTunja
   },
   {
     id: 'bogota',
     city: 'Bogotá',
-    status: 'Citas Previas',
+    status: 'Próximamente',
     address: 'Zona Rosa',
-    description: 'La experiencia Mona Keratina llega a la capital. Lujo orgánico en el sector más exclusivo.',
+    description: 'La experiencia Mona Keratina llega a la capital. Lujo orgánico en el sector más exclusivo de Bogotá.',
     perks: ['Exclusividad total', 'Horarios flexibles', 'Tratamientos premium'],
-    price: 'Zona Rosa',
-    img: sCirugia
+    price: 'Próximamente',
+    img: sedeBogota
   },
 ];
 
@@ -320,10 +324,10 @@ const App = () => {
                     <span className="text-xl font-serif text-primary/80">{activeSede.price}</span>
                   </div>
                   <a
-                    href={getWhatsAppUrl(`Hola! Deseo agendar una cita en ${activeSede.city}.`)}
-                    className="bg-primary text-white px-12 py-5 rounded-full text-[10px] uppercase tracking-[4px] font-bold hover:bg-accent transition-all shadow-xl active:scale-95"
+                    href={activeSede.id === 'bogota' ? getWhatsAppUrl(`Hola! Me gustaría que me avisaran cuando abran la sede de Bogotá.`) : getWhatsAppUrl(`Hola! Deseo agendar una cita en ${activeSede.city}.`)}
+                    className={`px-12 py-5 rounded-full text-[10px] uppercase tracking-[4px] font-bold transition-all shadow-xl active:scale-95 ${activeSede.id === 'bogota' ? 'bg-primary/20 text-primary/40 cursor-not-allowed' : 'bg-primary text-white hover:bg-accent'}`}
                   >
-                    Agendar ahora
+                    {activeSede.id === 'bogota' ? 'Próximamente' : 'Agendar ahora'}
                   </a>
                 </div>
               </div>
