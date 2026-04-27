@@ -1,0 +1,492 @@
+import React, { useEffect, useState } from 'react';
+import { 
+  Instagram, 
+  ArrowRight, 
+  MapPin, 
+  Menu, 
+  X,
+  Sparkles,
+  ArrowUpRight,
+  Plus,
+  Leaf,
+  Droplets,
+  Zap,
+  MessageCircle,
+  Check,
+  ChevronRight,
+  ShieldCheck,
+  Award
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Lenis from 'lenis';
+import { Logo } from './components/Logo';
+
+// Assets
+import heroImg from './assets/hero_principal.jpeg';
+import aboutImg from './assets/about.png';
+import sReconexion from './assets/service_reconexion.png';
+import sKeratina from './assets/service_keratina.png';
+import sFotonico from './assets/service_fotonico.png';
+import sCirugia from './assets/service_cirugia.png';
+
+const WHATSAPP_NUMBER = "573223328408";
+
+const getWhatsAppUrl = (message: string) => {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+};
+
+const services = [
+  { name: 'Reconexión Molecular', price: '240.000', featured: true, tag: 'Vegano', img: sReconexion },
+  { name: 'Keratina Premium', price: '220.000', img: sKeratina },
+  { name: 'Alisado Fotónico', price: '180.000', img: sFotonico },
+  { name: 'Cirugía Capilar', price: '160.000', img: sCirugia },
+];
+
+const sedes = [
+  { 
+    id: 'duitama',
+    city: 'Duitama', 
+    status: 'Sede Principal', 
+    address: 'Calle 16 # 14-25', 
+    description: 'Nuestra casa matriz donde comenzó la revolución de la belleza consciente en Boyacá. Un espacio diseñado para la excelencia.',
+    perks: ['Nanoinfusión capilar', 'Atención personalizada', 'Ambiente premium'],
+    price: 'Sede Principal',
+    img: sReconexion 
+  },
+  { 
+    id: 'sogamoso',
+    city: 'Sogamoso', 
+    status: 'Premium Concept', 
+    address: 'Carrera 11 # 12-40', 
+    description: 'Minimalismo y tecnología en el corazón de Sogamoso para transformar tu cabello con salud.',
+    perks: ['Terapias de ozono', 'Asesoría botánica', 'Relax total'],
+    price: 'Próximamente',
+    img: sKeratina 
+  },
+  { 
+    id: 'tunja',
+    city: 'Tunja', 
+    status: 'Studio Norte', 
+    address: 'CC Unicentro Local 24', 
+    description: 'Ubicación estratégica para brindarte el mejor alisado orgánico de la ciudad.',
+    perks: ['Fácil acceso', 'Corte global incluido', 'Tecnología fotónica'],
+    price: 'Agendar cita',
+    img: sFotonico 
+  },
+  { 
+    id: 'bogota',
+    city: 'Bogotá', 
+    status: 'Citas Previas', 
+    address: 'Zona Rosa', 
+    description: 'La experiencia Mona Keratina llega a la capital. Lujo orgánico en el sector más exclusivo.',
+    perks: ['Exclusividad total', 'Horarios flexibles', 'Tratamientos premium'],
+    price: 'Zona Rosa',
+    img: sCirugia 
+  },
+];
+
+const App = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSede, setActiveSede] = useState(sedes[0]);
+
+  useEffect(() => {
+    const lenis = new Lenis();
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-background text-primary selection:bg-accent selection:text-white pb-20">
+      {/* WhatsApp Floating Button */}
+      <motion.a 
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        whileHover={{ scale: 1.1 }}
+        href={getWhatsAppUrl("Hola Mona Keratina! Quisiera recibir información sobre sus servicios.")}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center group"
+      >
+        <MessageCircle size={32} />
+        <span className="absolute right-full mr-4 bg-white text-primary px-4 py-2 rounded-xl text-xs font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+          ¿Cómo podemos ayudarte?
+        </span>
+      </motion.a>
+
+      {/* Header */}
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-background/80 backdrop-blur-md py-4 border-b border-border/20' : 'bg-transparent py-6 border-transparent'}`}>
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <div className="flex-1 hidden md:flex gap-8 text-[10px] uppercase tracking-[3px] font-bold opacity-60">
+             <a href="#servicios" className="hover:text-accent transition-colors">Servicios</a>
+             <a href="#sedes" className="hover:text-accent transition-colors">Sedes</a>
+          </div>
+          
+          <div className="flex-shrink-0">
+             <Logo style={{ height: '40px' }} color="currentColor" className="text-primary" />
+          </div>
+
+          <div className="flex-1 flex justify-end items-center gap-6">
+             <div className="hidden md:flex gap-8 text-[10px] uppercase tracking-[3px] font-bold opacity-60">
+                <a href="#nosotros" className="hover:text-accent transition-colors">Filosofía</a>
+                <a href={getWhatsAppUrl("Hola! Deseo agendar una cita.")} className="hover:text-accent transition-colors">Contacto</a>
+             </div>
+             <a href="https://instagram.com" className="p-2 hover:text-accent transition-colors">
+                <Instagram size={20} />
+             </a>
+             <button className="md:hidden" onClick={() => setMobileMenuOpen(true)}>
+                <Menu size={20} />
+             </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <header className="pt-24 min-h-screen flex flex-col md:flex-row overflow-hidden">
+         <div className="w-full md:w-1/2 relative aspect-[3/4] md:aspect-none md:min-h-screen overflow-hidden">
+            <motion.img 
+              initial={{ scale: 1.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
+              src={heroImg} 
+              className="absolute inset-0 w-full h-full object-cover object-top md:object-center" 
+              alt="Mona Keratina - Belleza Consciente" 
+            />
+            <div className="absolute inset-0 bg-black/5"></div>
+            <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12">
+               <motion.a 
+                 href="#servicios"
+                 whileHover={{ scale: 1.05 }}
+                 className="bg-white/90 backdrop-blur-sm px-6 py-2.5 md:px-8 md:py-3 rounded-full text-[9px] md:text-[10px] uppercase tracking-[3px] font-bold shadow-xl inline-block"
+               >
+                 Ver servicios
+               </motion.a>
+            </div>
+         </div>
+         <div className="w-full md:w-1/2 flex items-center justify-center p-12 md:p-24 bg-background">
+            <div className="max-w-xl">
+               <motion.span 
+                 initial={{ opacity: 0 }}
+                 animate={{ opacity: 1 }}
+                 className="text-[11px] uppercase tracking-[5px] font-bold text-accent block mb-8"
+               >
+                 Salud Capilar & Lujo
+               </motion.span>
+               <motion.h1 
+                 initial={{ opacity: 0, y: 30 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 className="text-6xl md:text-8xl font-serif leading-[0.9] mb-12"
+               >
+                 Belleza consciente, <span className="italic font-normal">impacto real.</span>
+               </motion.h1>
+               <motion.p 
+                 initial={{ opacity: 0 }}
+                 animate={{ opacity: 1 }}
+                 transition={{ delay: 0.2 }}
+                 className="text-lg leading-relaxed opacity-60 mb-12"
+               >
+                 Expertos en la transformación de tu cabello con fórmulas orgánicas y tecnología de punta. Elevamos el estándar del alisado premium.
+               </motion.p>
+               <a href={getWhatsAppUrl("Hola Mona! Quiero agendar una valoración.")} className="inline-flex items-center gap-4 text-[11px] uppercase tracking-[4px] font-bold group border-b border-primary pb-2">
+                 AGENDAR VALORACIÓN <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+               </a>
+            </div>
+         </div>
+      </header>
+
+      {/* Our Top Services Section */}
+      <section id="servicios" className="py-32 px-6">
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-baseline mb-20 border-b border-border/20 pb-12 gap-6">
+             <div>
+                <h2 className="text-4xl md:text-5xl font-serif mb-4">Nuestros servicios destacados</h2>
+                <p className="text-[10px] uppercase tracking-widest font-bold opacity-40">Resultados de alta gama con fórmulas botánicas</p>
+             </div>
+             <a href={getWhatsAppUrl("Hola! Quisiera ver el catálogo completo de servicios.")} className="px-6 py-2 border border-primary/20 rounded-full text-[10px] uppercase tracking-widest font-bold hover:bg-primary hover:text-white transition-all">Ver todos</a>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-16">
+             {services.map((service, i) => (
+               <motion.div 
+                 key={service.name}
+                 initial={{ opacity: 0, y: 30 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 viewport={{ once: true }}
+                 transition={{ delay: i * 0.1 }}
+                 className="group"
+               >
+                  <div className={`aspect-[4/5] mb-8 relative overflow-hidden transition-all duration-1000 ${i % 2 === 1 ? 'rounded-[100px] md:rounded-[150px]' : 'rounded-[200px]'}`}>
+                     <img src={service.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt={service.name} />
+                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500"></div>
+                  </div>
+                  <div className="text-center px-4">
+                     <h3 className="text-sm font-bold uppercase tracking-widest mb-2 group-hover:text-accent transition-colors">{service.name}</h3>
+                     <p className="text-xs opacity-40 tracking-widest mb-6 font-bold">Desde ${service.price}</p>
+                     <a 
+                       href={getWhatsAppUrl(`Hola! Deseo reservar el servicio de ${service.name}.`)}
+                       className="inline-block px-6 py-2 border border-accent text-accent text-[9px] uppercase tracking-widest font-bold rounded-full hover:bg-accent hover:text-white transition-all shadow-sm active:scale-95"
+                     >
+                       Reservar ahora
+                     </a>
+                  </div>
+               </motion.div>
+             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section - Improved Offset Layout */}
+      <section id="nosotros" className="py-40 px-6 bg-surface/10 relative overflow-hidden">
+         {/* Decorative Element */}
+         <div className="absolute -top-20 -right-20 opacity-5 pointer-events-none">
+            <Leaf size={400} strokeWidth={0.5} className="text-primary" />
+         </div>
+         
+         <div className="container mx-auto">
+            <div className="relative">
+               {/* Background Block */}
+               <motion.div 
+                 initial={{ opacity: 0, x: -50 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 className="md:w-[80%] bg-surface p-12 md:p-32 rounded-[60px] relative z-10 shadow-sm border border-border/10"
+               >
+                  <div className="max-w-2xl">
+                    <span className="text-[10px] uppercase tracking-[6px] font-bold text-accent block mb-8">Nuestra Filosofía</span>
+                    <h2 className="text-5xl md:text-6xl font-serif mb-12 leading-tight">Mona Keratina:<br/><span className="text-accent italic">Ciencia que respeta tu esencia.</span></h2>
+                    <div className="space-y-8 text-lg md:text-xl leading-relaxed opacity-70">
+                      <p>
+                        No creemos en la belleza que duele. En Mona Keratina, hemos perfeccionado el arte del alisado orgánico para que sea una experiencia de bienestar profundo, no un sacrificio.
+                      </p>
+                      <p>
+                        Nuestra tecnología de <strong>Nanoinfusión Botánica</strong> permite que los activos penetren la fibra capilar sin químicos agresivos, devolviendo el brillo y la sedosidad natural que tu cabello merece.
+                      </p>
+                    </div>
+
+                    {/* Commitment Icons */}
+                    <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 pt-12 border-t border-border/20">
+                       <div className="flex flex-col gap-3">
+                          <Leaf className="text-accent" size={24} />
+                          <h4 className="text-[10px] uppercase tracking-widest font-bold">100% Orgánico</h4>
+                          <p className="text-[10px] opacity-40 font-bold uppercase tracking-widest leading-relaxed">Libre de formol y agresivos</p>
+                       </div>
+                       <div className="flex flex-col gap-3">
+                          <ShieldCheck className="text-accent" size={24} />
+                          <h4 className="text-[10px] uppercase tracking-widest font-bold">Seguridad Total</h4>
+                          <p className="text-[10px] opacity-40 font-bold uppercase tracking-widest leading-relaxed">Apto para todas las edades</p>
+                       </div>
+                       <div className="flex flex-col gap-3">
+                          <Award className="text-accent" size={24} />
+                          <h4 className="text-[10px] uppercase tracking-widest font-bold">Calidad Premium</h4>
+                          <p className="text-[10px] opacity-40 font-bold uppercase tracking-widest leading-relaxed">Expertos certificados</p>
+                       </div>
+                    </div>
+                  </div>
+               </motion.div>
+               {/* Offset Image with decorative frame */}
+               <motion.div 
+                 initial={{ opacity: 0, scale: 0.9, x: 50 }}
+                 whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                 className="hidden md:block absolute top-1/2 right-0 -translate-y-1/2 w-1/2 z-20"
+               >
+                  <div className="relative group p-4">
+                     <div className="absolute inset-0 border border-accent/20 rounded-[50px] translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-700"></div>
+                     <img src={aboutImg} className="w-full aspect-[4/5] object-cover rounded-[40px] shadow-2xl relative z-10" alt="Mona Studio Experience" />
+                  </div>
+               </motion.div>
+               {/* Mobile Image */}
+               <div className="md:hidden mt-8">
+                  <img src={aboutImg} className="w-full rounded-[40px] shadow-xl" alt="Mona Studio Experience" />
+               </div>
+            </div>
+         </div>
+      </section>
+
+      {/* Book An Appointment / Sedes Section */}
+      <section id="sedes" className="py-32 px-6">
+         <div className="container mx-auto">
+            <div className="text-center mb-16">
+               <h2 className="text-5xl font-serif mb-4">Reserva tu experiencia</h2>
+               <p className="opacity-40 uppercase tracking-widest text-[10px] font-bold">Encuéntranos en las ciudades más importantes de Boyacá y Bogotá</p>
+            </div>
+            
+            {/* Tabs */}
+            <div className="flex justify-center border-b border-border/30 mb-20 overflow-x-auto no-scrollbar">
+               {sedes.map((sede) => (
+                 <button
+                   key={sede.id}
+                   onClick={() => setActiveSede(sede)}
+                   className={`px-8 py-4 text-[10px] uppercase tracking-[3px] font-bold transition-all relative whitespace-nowrap ${activeSede.id === sede.id ? 'text-primary' : 'text-primary/30 hover:text-primary/60'}`}
+                 >
+                   {sede.city}
+                   {activeSede.id === sede.id && (
+                     <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent" />
+                   )}
+                 </button>
+               ))}
+            </div>
+
+            {/* Content */}
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={activeSede.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center"
+              >
+                <div className="relative">
+                   <div className="aspect-[3/4] rounded-t-full overflow-hidden border border-border/10 shadow-sm">
+                      <img src={activeSede.img} className="w-full h-full object-cover" alt={activeSede.city} />
+                   </div>
+                   <div className="absolute -bottom-6 -right-6 bg-white p-8 rounded-2xl shadow-2xl border border-border/5 hidden md:block max-w-[200px]">
+                      <div className="flex items-center gap-2 text-accent mb-3">
+                         <MapPin size={16} />
+                         <span className="text-[9px] uppercase tracking-widest font-bold">Localización</span>
+                      </div>
+                      <p className="text-xs font-bold opacity-80 leading-relaxed">{activeSede.address}</p>
+                   </div>
+                </div>
+                
+                <div className="max-w-md">
+                   <span className="text-accent text-[10px] uppercase tracking-[4px] font-bold mb-4 block">{activeSede.status}</span>
+                   <h3 className="text-4xl md:text-5xl font-serif mb-6">{activeSede.city}</h3>
+                   <p className="text-lg opacity-60 leading-relaxed mb-10">
+                     {activeSede.description}
+                   </p>
+                   <ul className="space-y-4 mb-12">
+                      {activeSede.perks.map(perk => (
+                        <li key={perk} className="flex items-center gap-3">
+                           <div className="w-5 h-5 rounded-full border border-accent/20 flex items-center justify-center text-accent">
+                             <Check size={12} />
+                           </div>
+                           <span className="text-xs opacity-60 tracking-widest font-medium">{perk}</span>
+                        </li>
+                      ))}
+                   </ul>
+                   <div className="flex items-center gap-8 pt-8 border-t border-border/10">
+                      <div className="flex flex-col">
+                        <span className="text-[8px] uppercase tracking-widest opacity-40 font-bold mb-1 tracking-[3px]">Categoría</span>
+                        <span className="text-xl font-serif text-primary/80">{activeSede.price}</span>
+                      </div>
+                      <a 
+                       href={getWhatsAppUrl(`Hola! Deseo agendar una cita en ${activeSede.city}.`)}
+                       className="bg-primary text-white px-12 py-5 rounded-full text-[10px] uppercase tracking-[4px] font-bold hover:bg-accent transition-all shadow-xl active:scale-95"
+                      >
+                        Agendar ahora
+                      </a>
+                   </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+         </div>
+      </section>
+
+      {/* Instagram Grid */}
+      <section className="py-32 px-6 bg-surface/30">
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+             <div>
+                <h2 className="text-4xl font-serif mb-4">Mona en el mundo</h2>
+                <p className="opacity-40 uppercase tracking-widest text-[10px] font-bold">Resultados reales de nuestras clientas @MonaKeratina</p>
+             </div>
+             <a href="https://instagram.com" className="flex items-center gap-2 text-xs uppercase tracking-widest font-bold hover:text-accent transition-all group">
+               Ir a Instagram <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+             </a>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+             {[sReconexion, sKeratina, sFotonico, sCirugia].map((img, i) => (
+               <div key={i} className="aspect-square rounded-[30px] overflow-hidden group">
+                  <img src={img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Instagram Result" />
+               </div>
+             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final Footer */}
+      <footer className="bg-background py-32 border-t border-border/10">
+         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-16">
+            <div className="col-span-1 md:col-span-1">
+               <Logo style={{ height: '40px' }} color="currentColor" className="text-primary mb-12" />
+               <p className="text-sm opacity-50 leading-relaxed max-w-xs">
+                  Redefiniendo la salud capilar a través de la ciencia orgánica y el lujo consciente.
+               </p>
+               <div className="flex gap-4 mt-8">
+                  <a href="#" className="w-10 h-10 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-sm">
+                     <Instagram size={18} />
+                  </a>
+                  <a href={getWhatsAppUrl("Hola Mona Keratina!")} className="w-10 h-10 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all shadow-sm">
+                     <MessageCircle size={18} />
+                  </a>
+               </div>
+            </div>
+            <div>
+               <h4 className="text-[10px] uppercase tracking-[4px] font-bold mb-8 opacity-80">Navegación</h4>
+               <ul className="space-y-4 text-[10px] opacity-40 uppercase tracking-[2px] font-bold">
+                  <li><a href="#servicios" className="hover:text-accent transition-colors">Servicios</a></li>
+                  <li><a href="#sedes" className="hover:text-accent transition-colors">Nuestras Sedes</a></li>
+                  <li><a href="#nosotros" className="hover:text-accent transition-colors">Filosofía</a></li>
+                  <li><a href={getWhatsAppUrl("Hola!")} className="hover:text-accent transition-colors">Contacto</a></li>
+               </ul>
+            </div>
+            <div>
+               <h4 className="text-[10px] uppercase tracking-[4px] font-bold mb-8 opacity-80">Ciudades</h4>
+               <ul className="space-y-4 text-[10px] opacity-40 uppercase tracking-[2px] font-bold">
+                  <li>Duitama (Boyacá)</li>
+                  <li>Sogamoso (Boyacá)</li>
+                  <li>Tunja (Boyacá)</li>
+                  <li>Bogotá D.C.</li>
+               </ul>
+            </div>
+            <div className="md:text-right">
+               <h4 className="text-[10px] uppercase tracking-[4px] font-bold mb-8 opacity-80">Mona Keratina</h4>
+               <p className="text-[10px] opacity-40 uppercase tracking-[2px] font-bold leading-relaxed">
+                  Presencia en Boyacá & Bogotá<br/>
+                  Atención Premium Garantizada<br/>
+                  © 2026 Todos los derechos reservados.
+               </p>
+            </div>
+         </div>
+      </footer>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: '100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '100%' }}
+            className="fixed inset-0 z-[100] bg-background p-8 flex flex-col justify-between"
+          >
+            <div>
+               <div className="flex justify-between items-center mb-20">
+                  <Logo style={{ height: '40px' }} color="currentColor" className="text-primary" />
+                  <button onClick={() => setMobileMenuOpen(false)} className="p-3 bg-surface rounded-full shadow-sm">
+                    <X size={24} />
+                  </button>
+               </div>
+               <nav className="flex flex-col gap-10">
+                  {['Servicios', 'Sedes', 'Filosofía'].map(item => (
+                    <a key={item} href={`#${item.toLowerCase()}`} className="text-5xl font-serif hover:text-accent transition-colors" onClick={() => setMobileMenuOpen(false)}>{item}</a>
+                  ))}
+               </nav>
+            </div>
+            <a href={getWhatsAppUrl("Hola! Deseo agendar una cita.")} className="w-full bg-primary text-white text-center py-6 rounded-full font-bold uppercase tracking-[4px] text-xs shadow-xl">
+              Agendar ahora
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default App;

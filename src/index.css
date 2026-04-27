@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-background: #F9F6F0;
+  --color-surface: #EBE3D5;
+  --color-primary: #5A4D41;
+  --color-accent: #8B7355;
+  --color-border: #D6CBB9;
+  
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-primary font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .btn-premium {
+    @apply px-8 py-3 rounded-full font-medium transition-all duration-300 active:scale-95 cursor-pointer;
+  }
+  
+  .btn-gold {
+    @apply bg-accent text-white hover:bg-accent/90 shadow-sm;
+  }
+  
+  .btn-outline {
+    @apply border border-accent text-accent hover:bg-accent hover:text-white;
+  }
+
+  .card-minimal {
+    @apply bg-white border border-gray-100 rounded-2xl p-6 transition-all duration-500 hover:shadow-xl hover:border-accent/20;
+  }
+}
+
+/* Custom Lenis Smooth Scroll Styles */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
