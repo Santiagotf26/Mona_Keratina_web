@@ -185,9 +185,10 @@ const App = () => {
                <motion.h1 
                  initial={{ opacity: 0, y: 30 }}
                  animate={{ opacity: 1, y: 0 }}
-                 className="text-6xl md:text-8xl font-serif leading-[0.9] mb-12"
+                 className="text-7xl md:text-[120px] font-serif mb-8 leading-[0.9] tracking-tighter"
                >
-                 Belleza consciente, <span className="italic font-normal">impacto real.</span>
+                 Mona <br />
+                 <span className="italic text-accent">Keratina.</span>
                </motion.h1>
                <motion.p 
                  initial={{ opacity: 0 }}
