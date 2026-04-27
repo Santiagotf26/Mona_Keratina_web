@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { 
   Instagram, 
   ArrowRight, 
   MapPin, 
   Menu, 
   X,
-  Sparkles,
-  ArrowUpRight,
-  Plus,
-  Leaf,
-  Droplets,
-  Zap,
   MessageCircle,
   Check,
-  ChevronRight,
   ShieldCheck,
   Award
 } from 'lucide-react';
@@ -245,9 +238,6 @@ const App = () => {
       {/* About Section - Improved Offset Layout */}
       <section id="nosotros" className="py-40 px-6 bg-surface/10 relative overflow-hidden">
          {/* Decorative Element */}
-         <div className="absolute -top-20 -right-20 opacity-5 pointer-events-none">
-            <Leaf size={400} strokeWidth={0.5} className="text-primary" />
-         </div>
          
          <div className="container mx-auto">
             <div className="relative">
@@ -272,7 +262,6 @@ const App = () => {
                     {/* Commitment Icons */}
                     <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 pt-12 border-t border-border/20">
                        <div className="flex flex-col gap-3">
-                          <Leaf className="text-accent" size={24} />
                           <h4 className="text-[10px] uppercase tracking-widest font-bold">100% Orgánico</h4>
                           <p className="text-[10px] opacity-40 font-bold uppercase tracking-widest leading-relaxed">Libre de formol y agresivos</p>
                        </div>
@@ -397,7 +386,7 @@ const App = () => {
                 <p className="opacity-40 uppercase tracking-widest text-[10px] font-bold">Resultados reales de nuestras clientas @MonaKeratina</p>
              </div>
              <a href="https://instagram.com" className="flex items-center gap-2 text-xs uppercase tracking-widest font-bold hover:text-accent transition-all group">
-               Ir a Instagram <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+               Ir a Instagram <ArrowRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
              </a>
           </div>
           
